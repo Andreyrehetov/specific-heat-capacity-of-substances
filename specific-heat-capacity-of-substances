@@ -1,0 +1,65 @@
+from tkinter import *
+
+def calculate_specific_heat_capacity():
+    selected_item = listbox.curselection()
+    substance = selected_item
+    joules=int(entry.get())
+    grams=int(entry1.get())
+    specific_heat_capacity = {
+        "gold":0.129,
+        "lead":0.13,
+        "mercury":0.14,
+        "tin":0.226,
+        "silver":0.234,
+        "copper":0.385,
+        "zinc":0.385,
+        "brass":0.378,
+        "iron":0.449,
+        "steel":0.47,
+        "cast iron":0.554,
+        "graphite":0.72,
+        "glass":0.703,
+        "brick":0.86,
+        "aluminum":0.897,
+        "sunflower oil":1.775,
+        "ice":2.150,
+        "kerosene":2.142,
+        "ether":2.34,
+        "oak":2.3,
+        "alcohol":2.47,
+        "water":4.182
+    }
+    
+    sp_heat = specific_heat_capacity[listbox.get(substance)]
+    result = round(joules/(grams*sp_heat),3)
+    result_label.config(text=str(result)+"=K")
+
+window = Tk()
+
+scrollbar = Scrollbar(window)
+scrollbar.pack()
+
+listbox = Listbox(yscrollcommand=scrollbar.set, width=40)
+listbox.pack()
+for substance in ["gold","lead","mercury","tin","silver","copper","zinc","brass","iron","steel","cast iron","graphite","glass","brick","aluminum","sunflower oil","ice","kerosene","ether","oak","alcohol","water"]:
+    listbox.insert(END, substance)
+    
+label=Label(text="write the amount of energy in joules")
+label.pack()
+
+entry=Entry()
+entry.pack()
+
+label1=Label(text="write the weight in grams")
+label1.pack()
+
+entry1=Entry()
+entry1.pack()
+
+calculate_button = Button( text="calculate",command=calculate_specific_heat_capacity)
+calculate_button.pack()
+
+result_label = Label("")
+result_label.pack()
+
+window.mainloop()
